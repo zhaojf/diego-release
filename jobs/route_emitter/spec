@@ -4,6 +4,7 @@ name: route_emitter
 templates:
   route_emitter_ctl.erb: bin/route_emitter_ctl
   syslog_forwarder.conf.erb: config/syslog_forwarder.conf
+  log_forwarder_ctl.erb: bin/log_forwarder_ctl
 
 packages:
   - pid_utils

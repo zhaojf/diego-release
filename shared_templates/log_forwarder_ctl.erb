@@ -1,0 +1,38 @@
+#!/bin/bash -e
+
+JOB_TEMPLATE_NAME=$1
+RUN_DIR=/var/vcap/sys/run/${JOB_TEMPLATE_NAME}
+LOG_DIR=/var/vcap/sys/log/${JOB_TEMPLATE_NAME}
+CONF_DIR=/var/vcap/jobs/${JOB_TEMPLATE_NAME}/config
+PIDFILE=$RUN_DIR/log_forwarder.pid
+
+source /var/vcap/packages/pid_utils/pid_utils.sh
+
+case $2 in
+
+  start)
+    pid_guard $PIDFILE "${JOB_TEMPLATE_NAME}_log_forwarder"
+
+    mkdir -p $RUN_DIR
+    mkdir -p $LOG_DIR
+
+    echo $$ > $PIDFILE
+
+    /var/vcap/packages/syslog_forwarder/syslog_forwarder.sh $CONF_DIR/syslog_forwarder.conf
+
+    exec tail -f -q $LOG_DIR/*out.log | logger -t vcap.${JOB_TEMPLATE_NAME}
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: log_forwarder_ctl {job template name} {start|stop}"
+
+    ;;
+
+esac
+

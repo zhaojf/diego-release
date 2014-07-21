@@ -3,3 +3,9 @@ check process route_emitter
   start program "/var/vcap/jobs/route_emitter/bin/route_emitter_ctl start"
   stop program "/var/vcap/jobs/route_emitter/bin/route_emitter_ctl stop"
   group vcap
+
+check process router_emitter_log_forwarder
+  with pidfile /var/vcap/sys/run/route_emitter/log_forwarder.pid
+  start program "/var/vcap/jobs/route_emitter/bin/log_forwarder_ctl start"
+  stop program "/var/vcap/jobs/route_emitter/bin/log_forwarder_ctl stop"
+  group vcap

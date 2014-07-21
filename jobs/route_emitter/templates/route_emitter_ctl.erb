@@ -17,10 +17,7 @@ case $1 in
 
     echo $$ > /var/vcap/sys/run/route_emitter/route_emitter.pid
 
-    /var/vcap/packages/syslog_forwarder/syslog_forwarder.sh $CONF_DIR/syslog_forwarder.conf
-
     exec /var/vcap/packages/route_emitter/bin/route-emitter \
-      -syslogName=vcap.route_emitter \
       -etcdCluster=<%= p("route_emitter.etcd.machines").map{|addr| "\"http://#{addr}:4001\""}.join(",")%> \
       -natsAddresses=<%= p("route_emitter.nats.machines").collect { |addr| "#{addr}:#{p("route_emitter.nats.port")}" }.join(",") %> \
       -natsUsername=<%= p("route_emitter.nats.username") %> \
