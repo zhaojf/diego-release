@@ -1,0 +1,34 @@
+#!/bin/bash
+
+echo github.com/cloudfoundry/dropsonde; ag -A3 'github.com/cloudfoundry/dropsonde' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry/gibson; ag -A3 'github.com/cloudfoundry/gibson' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry/gorouter; ag -A3 'github.com/cloudfoundry/gorouter' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry/gosigar; ag -A3 'github.com/cloudfoundry/gosigar' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry/gosteno; ag -A3 'github.com/cloudfoundry/gosteno' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry/gunk; ag -A3 'github.com/cloudfoundry/gunk' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry/loggregatorlib; ag -A3 'github.com/cloudfoundry/loggregatorlib' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry/storeadapter; ag -A3 'github.com/cloudfoundry/storeadapter' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry/yagnats; ag -A3 'github.com/cloudfoundry/yagnats' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/coreos/etcd; ag -A3 'github.com/coreos/etcd' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/coreos/go-etcd; ag -A3 'github.com/coreos/go-etcd' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/docker/docker; ag -A3 'github.com/docker/docker' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/docker/libcontainer; ag -A3 'github.com/docker/libcontainer' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/fraenkel/candiedyaml; ag -A3 'github.com/fraenkel/candiedyaml' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/gorilla/websocket; ag -A3 'github.com/gorilla/websocket' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/kr/pty; ag -A3 'github.com/kr/pty' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/nu7hatch/gouuid; ag -A3 'github.com/nu7hatch/gouuid' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/onsi/ginkgo; ag -A3 'github.com/onsi/ginkgo' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/onsi/gomega; ag -A3 'github.com/onsi/gomega' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/pkg/term; ag -A3 'github.com/pkg/term' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/stretchr/testify; ag -A3 'github.com/stretchr/testify' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/tchap/go-patricia; ag -A3 'github.com/tchap/go-patricia' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/tedsuo/ifrit; ag -A3 'github.com/tedsuo/ifrit' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/tedsuo/rata; ag -A3 'github.com/tedsuo/rata' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry-incubator/auction; ag -A3 'github.com/cloudfoundry-incubator/auction' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry-incubator/candiedyaml; ag -A3 'github.com/cloudfoundry-incubator/candiedyaml' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry-incubator/cf-debug-server; ag -A3 'github.com/cloudfoundry-incubator/cf-debug-server' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry-incubator/cf-lager; ag -A3 'github.com/cloudfoundry-incubator/cf-lager' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry-incubator/delta_force; ag -A3 'github.com/cloudfoundry-incubator/delta_force' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry-incubator/garden; ag -A3 'github.com/cloudfoundry-incubator/garden' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry-incubator/metricz; ag -A3 'github.com/cloudfoundry-incubator/metricz' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u
+echo github.com/cloudfoundry-incubator/runtime-schema; ag -A3 'github.com/cloudfoundry-incubator/runtime-schema' `find . -name 'Godeps.json'` | grep Rev | cut -d ' ' -f2 | sort -u

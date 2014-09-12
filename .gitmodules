@@ -196,3 +196,9 @@
 [submodule "src/github.com/stretchr/objx"]
 	path = src/github.com/stretchr/objx
 	url = https://github.com/stretchr/objx.git
+[submodule "src/github.com/cloudfoundry/cf-acceptance-tests"]
+	path = src/github.com/cloudfoundry/cf-acceptance-tests
+	url = https://github.com/cloudfoundry/cf-acceptance-tests.git
+[submodule "src/github.com/cloudfoundry-incubator/cf-test-helpers"]
+	path = src/github.com/cloudfoundry-incubator/cf-test-helpers
+	url = https://github.com/cloudfoundry-incubator/cf-test-helpers.git
