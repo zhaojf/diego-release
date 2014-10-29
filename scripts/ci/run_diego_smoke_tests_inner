@@ -16,4 +16,4 @@ cf create-space ${SMOKE_TEST_SPACE}
 cf target -s ${SMOKE_TEST_SPACE}
 
 cd ${GOPATH}/src/github.com/cloudfoundry-incubator/diego-smoke-tests
-ginkgo -r diego
+ginkgo -r
