@@ -1,12 +1,19 @@
 #!/bin/bash
 
-set -e -x -u
+set -e -x
 
-smoke_tests_manifest=${PWD}/${SMOKE_TESTS_MANIFEST}
+export GOPATH=${PWD} # diego-release
+export PATH=${GOPATH}/bin:$PATH
 
-eval $(./scripts/ci/bosh_config)
-./scripts/ci/bosh_setup
+go install github.com/onsi/ginkgo/ginkgo
 
-bosh deployment ${smoke_tests_manifest}
-bosh -n deploy
-bosh run errand diego_smoke_tests
+source ${PWD}/${SMOKE_TEST_CONFIG}
+
+cf api ${CC_API_SCHEME}://${CC_API_HOST} --skip-ssl-validation=${SKIP_SSL_VALIDATION}
+cf auth ${SMOKE_TEST_USER} ${SMOKE_TEST_PASSWORD}
+cf target -o ${SMOKE_TEST_ORG}
+cf create-space ${SMOKE_TEST_SPACE}
+cf target -s ${SMOKE_TEST_SPACE}
+
+cd ${GOPATH}/src/github.com/cloudfoundry-incubator/diego-smoke-tests
+ginkgo -r diego

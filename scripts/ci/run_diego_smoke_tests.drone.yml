@@ -2,10 +2,7 @@ image: cloudfoundry/diego-pipeline
 
 env:
   - GOROOT=/usr/local/go
-  - BOSH_USER={{BOSH_USER}}
-  - BOSH_PASSWORD={{BOSH_PASSWORD}}
-  - BOSH_TARGET={{BOSH_TARGET}}
-  - SMOKE_TESTS_MANIFEST={{SMOKE_TESTS_MANIFEST}}
+  - SMOKE_TEST_CONFIG={{SMOKE_TEST_CONFIG}}
 
 script:
   - ./scripts/ci/run_diego_smoke_tests_inner
