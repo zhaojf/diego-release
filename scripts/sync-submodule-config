@@ -49,6 +49,7 @@ go install github.com/vito/gosub
 
   # garden-linux uses godeps, so we should really only need its parent package
   echo github.com/cloudfoundry-incubator/garden-linux
+  echo github.com/cloudfoundry-incubator/garden-windows
 } > /tmp/packages
 
 cat /tmp/packages | xargs gosub sync

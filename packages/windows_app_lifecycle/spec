@@ -1,0 +1,5 @@
+---
+name: windows_app_lifecycle
+
+files:
+  - windows_app_lifecycle/windows_app_lifecycle.tgz

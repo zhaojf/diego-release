@@ -28,3 +28,7 @@ consul/consul_0.5.0_linux_amd64.zip:
   sha: !binary |-
     MDBlNGM2ZTlmZjJmYjMyNmQzYjU4NmZkODZjMzAzN2YzYjdlMDk3NA==
   size: 4669655
+windows_app_lifecycle/windows_app_lifecycle.tgz:
+  object_id: 00146d49-2721-4120-b63a-166e36899c45
+  sha: c4d74905ea677284c95c91c10138ff3ad4f66319
+  size: 819558
