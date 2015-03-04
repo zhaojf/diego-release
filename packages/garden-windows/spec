@@ -9,7 +9,6 @@ files:
   - github.com/cloudfoundry-incubator/garden-windows/backend/*.go # gosub
   - github.com/cloudfoundry-incubator/garden-windows/container/*.go # gosub
   - github.com/cloudfoundry-incubator/garden-windows/process/*.go # gosub
-  - github.com/cloudfoundry-incubator/garden-windows/Godeps/_workspace/src/code.google.com/p/go.net/websocket/*.go # gosub
   - github.com/cloudfoundry-incubator/garden-windows/Godeps/_workspace/src/github.com/bmizerany/pat/*.go # gosub
   - github.com/cloudfoundry-incubator/garden-windows/Godeps/_workspace/src/github.com/cloudfoundry-incubator/cf-lager/*.go # gosub
   - github.com/cloudfoundry-incubator/garden-windows/Godeps/_workspace/src/github.com/cloudfoundry-incubator/garden/*.go # gosub
@@ -19,5 +18,6 @@ files:
   - github.com/cloudfoundry-incubator/garden-windows/Godeps/_workspace/src/github.com/cloudfoundry-incubator/garden/server/timebomb/*.go # gosub
   - github.com/cloudfoundry-incubator/garden-windows/Godeps/_workspace/src/github.com/cloudfoundry-incubator/garden/transport/*.go # gosub
   - github.com/cloudfoundry-incubator/garden-windows/Godeps/_workspace/src/github.com/gogo/protobuf/proto/*.go # gosub
+  - github.com/cloudfoundry-incubator/garden-windows/Godeps/_workspace/src/github.com/gorilla/websocket/*.go # gosub
   - github.com/cloudfoundry-incubator/garden-windows/Godeps/_workspace/src/github.com/pivotal-golang/lager/*.go # gosub
   - github.com/cloudfoundry-incubator/garden-windows/Godeps/_workspace/src/github.com/tedsuo/rata/*.go # gosub
