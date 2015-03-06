@@ -22,6 +22,10 @@ properties:
     default:
       lucid64: buildpack_app_lifecycle/buildpack_app_lifecycle.tgz
       windows: windows_app_lifecycle/windows_app_lifecycle.tgz
+      windows2: windows_app_lifecycle/windows_app_lifecycle.tgz
+      windows3: windows_app_lifecycle/windows_app_lifecycle.tgz
+      windows4: windows_app_lifecycle/windows_app_lifecycle.tgz
+      windows-acceptance: windows_app_lifecycle/windows_app_lifecycle.tgz
   diego.nsync.docker_lifecycle_bundle:
     description: Lifecycle bundle for docker apps
     default: docker_app_lifecycle/docker_app_lifecycle.tgz
