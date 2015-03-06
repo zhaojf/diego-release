@@ -19,6 +19,7 @@ files:
   - github.com/cloudfoundry-incubator/executor/*.go # gosub
   - github.com/cloudfoundry-incubator/executor/http/*.go # gosub
   - github.com/cloudfoundry-incubator/executor/http/client/*.go # gosub
+  - github.com/cloudfoundry-incubator/executor/volume/*.go # gosub
   - github.com/cloudfoundry-incubator/rep/*.go # gosub
   - github.com/cloudfoundry-incubator/rep/auction_cell_rep/*.go # gosub
   - github.com/cloudfoundry-incubator/rep/evacuation/*.go # gosub
