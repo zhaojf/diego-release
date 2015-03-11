@@ -25,6 +25,7 @@ files:
   - github.com/cloudfoundry-incubator/runtime-schema/bbs/lock_bbs/*.go # gosub
   - github.com/cloudfoundry-incubator/runtime-schema/bbs/lrp_bbs/*.go # gosub
   - github.com/cloudfoundry-incubator/runtime-schema/bbs/prune/*.go # gosub
+  - github.com/cloudfoundry-incubator/runtime-schema/bbs/repositories/*.go # gosub
   - github.com/cloudfoundry-incubator/runtime-schema/bbs/services_bbs/*.go # gosub
   - github.com/cloudfoundry-incubator/runtime-schema/bbs/shared/*.go # gosub
   - github.com/cloudfoundry-incubator/runtime-schema/bbs/task_bbs/*.go # gosub
@@ -54,6 +55,8 @@ files:
   - github.com/coreos/etcd/etcdserver/etcdhttp/httptypes/*.go # gosub
   - github.com/coreos/etcd/pkg/types/*.go # gosub
   - github.com/coreos/go-etcd/etcd/*.go # gosub
+  - github.com/go-gorp/gorp/*.go # gosub
+  - github.com/go-sql-driver/mysql/*.go # gosub
   - github.com/nu7hatch/gouuid/*.go # gosub
   - github.com/pivotal-golang/clock/*.go # gosub
   - github.com/pivotal-golang/lager/*.go # gosub
