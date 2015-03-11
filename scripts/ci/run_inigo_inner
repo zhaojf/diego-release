@@ -1,5 +1,26 @@
 #!/bin/bash
 
+losetup -d /dev/loop0 
+losetup -d /dev/loop1 
+losetup -d /dev/loop2 
+losetup -d /dev/loop3 
+losetup -d /dev/loop4 
+losetup -d /dev/loop5 
+losetup -d /dev/loop6 
+losetup -d /dev/loop7 
+losetup -d /dev/loop8 
+losetup -d /dev/loop9 
+losetup -d /dev/loop10
+losetup -d /dev/loop11
+losetup -d /dev/loop12
+losetup -d /dev/loop13
+losetup -d /dev/loop14
+losetup -d /dev/loop15
+losetup -d /dev/loop16
+losetup -d /dev/loop17
+losetup -d /dev/loop18
+losetup -d /dev/loop19
+
 set -e -x
 
 export GOROOT=/usr/local/go
@@ -55,6 +76,16 @@ mknod -m0666 /dev/loop6 b 7 6
 mknod -m0666 /dev/loop7 b 7 7
 mknod -m0666 /dev/loop8 b 7 8
 mknod -m0666 /dev/loop9 b 7 9
+mknod -m0666 /dev/loop10 b 7 10
+mknod -m0666 /dev/loop11 b 7 11
+mknod -m0666 /dev/loop12 b 7 12
+mknod -m0666 /dev/loop13 b 7 13
+mknod -m0666 /dev/loop14 b 7 14
+mknod -m0666 /dev/loop15 b 7 15
+mknod -m0666 /dev/loop16 b 7 16
+mknod -m0666 /dev/loop17 b 7 17
+mknod -m0666 /dev/loop18 b 7 18
+mknod -m0666 /dev/loop19 b 7 19
 
 go install github.com/onsi/ginkgo/ginkgo
 
@@ -92,3 +123,4 @@ pushd $GOPATH_ROOT/src/github.com/cloudfoundry-incubator/inigo
     ginkgo $color_flag $nodes_flag -r -skipPackage=executor -failOnPending -randomizeAllSpecs -trace -race -slowSpecThreshold=10 -keepGoing "$@"
   fi
 popd
+

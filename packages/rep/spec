@@ -19,7 +19,6 @@ files:
   - github.com/cloudfoundry-incubator/executor/*.go # gosub
   - github.com/cloudfoundry-incubator/executor/http/*.go # gosub
   - github.com/cloudfoundry-incubator/executor/http/client/*.go # gosub
-  - github.com/cloudfoundry-incubator/executor/volume/*.go # gosub
   - github.com/cloudfoundry-incubator/rep/*.go # gosub
   - github.com/cloudfoundry-incubator/rep/auction_cell_rep/*.go # gosub
   - github.com/cloudfoundry-incubator/rep/evacuation/*.go # gosub
@@ -39,6 +38,7 @@ files:
   - github.com/cloudfoundry-incubator/runtime-schema/bbs/services_bbs/*.go # gosub
   - github.com/cloudfoundry-incubator/runtime-schema/bbs/shared/*.go # gosub
   - github.com/cloudfoundry-incubator/runtime-schema/bbs/task_bbs/*.go # gosub
+  - github.com/cloudfoundry-incubator/runtime-schema/bbs/volume_bbs/*.go # gosub
   - github.com/cloudfoundry-incubator/runtime-schema/cb/*.go # gosub
   - github.com/cloudfoundry-incubator/runtime-schema/diego_errors/*.go # gosub
   - github.com/cloudfoundry-incubator/runtime-schema/heartbeater/*.go # gosub
