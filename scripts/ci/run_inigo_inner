@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Allow our containers to mount loop devices
+mkdir /tmp/devices-cgroup
+mount -t cgroup -o devices none /tmp/devices-cgroup
+echo 'b 7:* rwm' > /tmp/devices-cgroup/instance-$(hostname)/devices.allow
+
 losetup -d /dev/loop0 
 losetup -d /dev/loop1 
 losetup -d /dev/loop2 
@@ -62,10 +67,6 @@ pushd $GOPATH_ROOT/src/github.com/cloudfoundry-incubator/garden-linux/old
   export GARDEN_BINPATH=$PWD/linux_backend/bin
 popd
 
-# Allow our containers to mount loop devices
-mkdir /tmp/devices-cgroup
-mount -t cgroup -o devices none /tmp/devices-cgroup
-echo 'b 7:* rwm' > /tmp/devices-cgroup/instance-$(hostname)/devices.allow
 mknod -m0666 /dev/loop0 b 7 0
 mknod -m0666 /dev/loop1 b 7 1
 mknod -m0666 /dev/loop2 b 7 2
