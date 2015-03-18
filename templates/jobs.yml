@@ -83,32 +83,6 @@ jobs:
         rep:
           zone: z1
 
-  - name: cell_windows_z1
-    release: diego
-    templates:
-      - name: rep
-      - name: consul-agent
-      - name: executor
-      - name: garden-windows
-      - name: receptor
-      - name: metron_agent
-        release: cf
-    instances: 0
-    resource_pool: large_z1
-    networks:
-      - name: diego1
-    properties:
-      consul:
-        agent:
-          services:
-            - receptor
-          servers:
-            lan: (( consul_servers ))
-      loggregator_endpoint:
-        shared_secret: (( external_cf_services.loggregator_endpoint.shared_secret ))
-      metron_agent:
-        zone: z1
-
   - name: cc_bridge_z1
     release: diego
     templates:
@@ -228,32 +202,6 @@ jobs:
       diego:
         rep:
           zone: z2
-
-  - name: cell_windows_z2
-    release: diego
-    templates:
-      - name: rep
-      - name: consul-agent
-      - name: executor
-      - name: garden-windows
-      - name: receptor
-      - name: metron_agent
-        release: cf
-    instances: 0
-    resource_pool: large_z2
-    networks:
-      - name: diego2
-    properties:
-      consul:
-        agent:
-          services:
-            - receptor
-          servers:
-            lan: (( consul_servers ))
-      loggregator_endpoint:
-        shared_secret: (( external_cf_services.loggregator_endpoint.shared_secret ))
-      metron_agent:
-        zone: z2
 
   - name: cc_bridge_z2
     release: diego
@@ -425,4 +373,3 @@ properties:
       log_level: info
 
     garden-linux: ~
-    garden-windows: ~
