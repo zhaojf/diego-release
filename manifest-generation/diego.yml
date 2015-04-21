@@ -87,6 +87,18 @@ resource_pools:
     network: diego3
     stemcell: (( iaas_settings.stemcell ))
     cloud_properties: (( iaas_settings.resource_pool_cloud_properties.route_emitter_z3.cloud_properties ))
+  - name: ssh_proxy_z1
+    network: diego1
+    stemcell: (( iaas_settings.stemcell ))
+    cloud_properties: (( iaas_settings.resource_pool_cloud_properties.ssh_proxy_z1.cloud_properties ))
+  - name: ssh_proxy_z2
+    network: diego2
+    stemcell: (( iaas_settings.stemcell ))
+    cloud_properties: (( iaas_settings.resource_pool_cloud_properties.ssh_proxy_z2.cloud_properties ))
+  - name: ssh_proxy_z3
+    network: diego3
+    stemcell: (( iaas_settings.stemcell ))
+    cloud_properties: (( iaas_settings.resource_pool_cloud_properties.ssh_proxy_z3.cloud_properties ))
 
 jobs:
   - name: etcd_z1
@@ -146,7 +158,7 @@ jobs:
       - name: diego1
     update:
       serial: false
-      max_in_flight: (( instance_count_overrides.cell_z1.max_in_flight || 1))
+      max_in_flight: (( instance_count_overrides.cell_z1.max_in_flight || 1 ))
     properties:
       metron_agent:
         zone: z1
@@ -166,7 +178,7 @@ jobs:
       - name: diego1
     update:
       serial: false
-      max_in_flight: (( instance_count_overrides.cc_bridge_z1.max_in_flight || 1))
+      max_in_flight: (( instance_count_overrides.cc_bridge_z1.max_in_flight || 1 ))
     properties:
       metron_agent:
         zone: z1
@@ -186,7 +198,21 @@ jobs:
       - name: diego1
     update:
       serial: false
-      max_in_flight: (( instance_count_overrides.route_emitter_z1.max_in_flight || 1))
+      max_in_flight: (( instance_count_overrides.route_emitter_z1.max_in_flight || 1 ))
+    properties:
+      metron_agent:
+        zone: z1
+
+  - name: ssh_proxy_z1
+    templates: (( base_job_templates.ssh_proxy additional_jobs.ssh_proxy))
+    instances: (( instance_count_overrides.ssh_proxy_z1.instances || 1 ))
+    resource_pool: ssh_proxy_z1
+    networks:
+      - name: diego1
+        static_ips: (( static_ips(1) ))
+    update:
+      serial: false
+      max_in_flight: (( instance_count_overrides.ssh_proxy_z1.max_in_flight || 1 ))
     properties:
       metron_agent:
         zone: z1
@@ -257,6 +283,20 @@ jobs:
       metron_agent:
         zone: z2
 
+  - name: ssh_proxy_z2
+    templates: (( base_job_templates.ssh_proxy additional_jobs.ssh_proxy))
+    instances: (( instance_count_overrides.ssh_proxy_z2.instances || 1 ))
+    resource_pool: ssh_proxy_z2
+    networks:
+      - name: diego2
+        static_ips: (( static_ips(1) ))
+    update:
+      serial: false
+      max_in_flight: (( instance_count_overrides.ssh_proxy_z2.max_in_flight || 1))
+    properties:
+      metron_agent:
+        zone: z2
+
   - name: brain_z3
     templates: (( base_job_templates.brain additional_jobs.brain ))
     instances: (( instance_count_overrides.brain_z3.instances || 0 ))
@@ -323,6 +363,20 @@ jobs:
       metron_agent:
         zone: z3
 
+  - name: ssh_proxy_z3
+    templates: (( base_job_templates.ssh_proxy additional_jobs.ssh_proxy))
+    instances: (( instance_count_overrides.ssh_proxy_z3.instances || 0 ))
+    resource_pool: ssh_proxy_z3
+    networks:
+      - name: diego3
+        static_ips: (( static_ips(1) ))
+    update:
+      serial: false
+      max_in_flight: (( instance_count_overrides.ssh_proxy_z3.max_in_flight || 1))
+    properties:
+      metron_agent:
+        zone: z3
+
 properties:
   # -- Properties below are used by the metron_agent job from cf-release --
   metron_agent:
@@ -361,6 +415,8 @@ properties:
       etcd:
         machines: (( jobs.etcd_z1.networks.diego1.static_ips jobs.etcd_z2.networks.diego2.static_ips jobs.etcd_z3.networks.diego3.static_ips ))
       log_level: (( property_overrides.converger.log_level || nil ))
+    etcd:
+      machines: (( jobs.etcd_z1.networks.diego1.static_ips jobs.etcd_z2.networks.diego2.static_ips jobs.etcd_z3.networks.diego3.static_ips ))
     executor:
       allow_privileged: (( property_overrides.executor.allow_privileged || nil ))
       drain_timeout_in_seconds: (( property_overrides.executor.drain_timeout_in_seconds || nil ))
@@ -368,15 +424,6 @@ properties:
         network: (( property_overrides.executor.garden.network || nil ))
         address: (( property_overrides.executor.garden.address || nil ))
       log_level: (( property_overrides.executor.log_level || nil ))
-    etcd:
-      machines: (( jobs.etcd_z1.networks.diego1.static_ips jobs.etcd_z2.networks.diego2.static_ips jobs.etcd_z3.networks.diego3.static_ips ))
-    garden-linux:
-      kernel_network_tuning_enabled: (( property_overrides.garden-linux.kernel_network_tuning_enabled || nil ))
-      disk_quota_enabled: (( property_overrides.garden-linux.disk_quota_enabled || nil ))
-      listen_network: (( property_overrides.garden-linux.listen_network || nil ))
-      listen_address: (( property_overrides.garden-linux.listen_address || nil ))
-      allow_networks: (( property_overrides.garden-linux.allow_networks || nil ))
-      insecure_docker_registry_list: (( property_overrides.garden-linux.insecure_docker_registry_list || nil ))
     file_server:
       cc:
         base_url: (( config_from_cf.cc.srv_api_uri ))
@@ -385,6 +432,13 @@ properties:
         staging_upload_user: (( config_from_cf.cc.staging_upload_user ))
         staging_upload_password: (( config_from_cf.cc.staging_upload_password ))
       log_level: (( property_overrides.file_server.log_level || nil ))
+    garden-linux:
+      kernel_network_tuning_enabled: (( property_overrides.garden-linux.kernel_network_tuning_enabled || nil ))
+      disk_quota_enabled: (( property_overrides.garden-linux.disk_quota_enabled || nil ))
+      listen_network: (( property_overrides.garden-linux.listen_network || nil ))
+      listen_address: (( property_overrides.garden-linux.listen_address || nil ))
+      allow_networks: (( property_overrides.garden-linux.allow_networks || nil ))
+      insecure_docker_registry_list: (( property_overrides.garden-linux.insecure_docker_registry_list || nil ))
     nsync:
       diego_api_url: (( "http://" receptor.username ":" receptor.password "@receptor.service.consul:8888" ))
       cc:
@@ -435,7 +489,7 @@ properties:
     ssh_proxy:
       diego_api_url: (( "http://" receptor.username ":" receptor.password "@receptor.service.consul:8888" ))
       host_key: (( property_overrides.ssh_proxy.host_key || "" ))
-      private_key: (( property_overrides.ssh_proxy.private_key || "" ))
+      servers: (( jobs.ssh_proxy_z1.networks.diego1.static_ips jobs.ssh_proxy_z2.networks.diego2.static_ips jobs.ssh_proxy_z3.networks.diego3.static_ips ))
     stager:
       cc:
         base_url: (( config_from_cf.cc.srv_api_uri ))
@@ -469,6 +523,7 @@ additional_jobs:
   cell: (( merge || [] ))
   cc_bridge: (( merge || [] ))
   route_emitter: (( merge || [] ))
+  ssh_proxy: (( merge || [] ))
 base_releases:
   - name: diego
     version: latest
@@ -497,8 +552,6 @@ base_job_templates:
       release: diego
     - name: receptor
       release: diego
-    - name: ssh_proxy
-      release: diego
     - name: metron_agent
       release: cf
   cc_bridge:
@@ -516,6 +569,13 @@ base_job_templates:
       release: cf
   route_emitter:
     - name: route_emitter
+      release: diego
+    - name: consul_agent
+      release: cf
+    - name: metron_agent
+      release: cf
+  ssh_proxy:
+    - name: ssh_proxy
       release: diego
     - name: consul_agent
       release: cf
