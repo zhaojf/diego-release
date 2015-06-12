@@ -20,3 +20,13 @@ properties:
   diego.etcd.log_sync_timeout_in_seconds:
     description: "Time to wait for a joining node to finish syncing logs with the existing cluster in seconds"
     default: 30
+  diego.etcd.ca_cert_pem:
+    description: "PEM-encoded CA certificate"
+  diego.etcd.server_cert_pem:
+    description: "PEM-encoded server certificate"
+  diego.etcd.server_key_pem:
+    description: "PEM-encoded server key"
+  diego.etcd.client_cert_pem:
+    description: "PEM-encoded client certificate"
+  diego.etcd.client_key_pem:
+    description: "PEM-encoded client key"

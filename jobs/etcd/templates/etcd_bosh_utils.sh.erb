@@ -1,6 +1,7 @@
 LOG_DIR=/var/vcap/sys/log/etcd
 STORE_DIR=/var/vcap/store
 DATA_DIR=${STORE_DIR}/etcd
+CERT_DIR=/var/vcap/jobs/etcd/config/certs
 
 <%
   def discover_external_ip
@@ -27,21 +28,44 @@ DATA_DIR=${STORE_DIR}/etcd
 
 node_name="<%= name %>-<%= spec.index %>"
 listen_peer_url="http://0.0.0.0:7001"
-listen_client_url="http://0.0.0.0:4001"
+listen_client_url="https://0.0.0.0:4001"
 advertise_peer_url="http://<%= my_ip %>:7001"
-advertise_client_url="http://<%= my_ip %>:4001"
+advertise_client_url="https://<%= my_ip %>:4001"
 this_node="${node_name}=${advertise_peer_url}"
 
+ca_cert_file=${CERT_DIR}/ca.crt
+server_cert_file=${CERT_DIR}/server.crt
+server_key_file=${CERT_DIR}/server.key
+client_cert_file=${CERT_DIR}/client.crt
+client_key_file=${CERT_DIR}/client.key
+
+etcdctl_sec_flags=" \
+  -ca-file=${CERT_DIR}/ca.crt \
+  -cert-file=${CERT_DIR}/client.crt \
+  -key-file=${CERT_DIR}/client.key"
+
+create_cert_files() {
+  mkdir -p ${CERT_DIR}
+  echo -n '<%= p("diego.etcd.ca_cert_pem") %>' > ${ca_cert_file}
+  echo -n '<%= p("diego.etcd.server_cert_pem") %>' > ${server_cert_file}
+  echo -n '<%= p("diego.etcd.server_key_pem") %>' > ${server_key_file}
+  echo -n '<%= p("diego.etcd.client_cert_pem") %>' > ${client_cert_file}
+  echo -n '<%= p("diego.etcd.client_key_pem") %>' > ${client_key_file}
+
+  chown vcap:vcap ${CERT_DIR}/*.{crt,key} 
+  chmod 640 ${CERT_DIR}/*.{crt,key}
+}
+
 member_list() {
-  /var/vcap/packages/etcd/etcdctl -C '<%= peers %>' member list || echo ""
+  /var/vcap/packages/etcd/etcdctl ${etcdctl_sec_flags} -C '<%= peers %>' member list || echo ""
 }
 
 member_remove() {
-  /var/vcap/packages/etcd/etcdctl -C '<%= peers %>' member remove $1
+  /var/vcap/packages/etcd/etcdctl ${etcdctl_sec_flags} -C '<%= peers %>' member remove $1
 }
 
 member_add() {
-  /var/vcap/packages/etcd/etcdctl -C '<%= peers %>' member add ${node_name} ${advertise_peer_url}
+  /var/vcap/packages/etcd/etcdctl ${etcdctl_sec_flags} -C '<%= peers %>' member add ${node_name} ${advertise_peer_url}
 }
 
 extract_cluster_from_member_list() {
