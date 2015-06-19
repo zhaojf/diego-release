@@ -1,0 +1,164 @@
+{
+   "routes" : {},
+   "setup" : {
+      "serial" : {
+         "actions" : [
+            {
+               "download" : {
+                  "to" : "/tmp/lifecycle",
+                  "cache_key" : "buildpack-cflinuxfs2-lifecycle",
+                  "from" : "http://file-server.service.consul:8080/v1/static/buildpack_app_lifecycle/buildpack_app_lifecycle.tgz"
+               }
+            },
+            {
+               "download" : {
+                  "from" : "http://cloud-controller-ng.service.consul:9022/internal/v2/droplets/51112e8f-13d4-47d4-8b39-4f4c376af570/461a190730b6025143259d79d09e49ef99862cae/download",
+                  "cache_key" : "droplets-51112e8f-13d4-47d4-8b39-4f4c376af570-d2d8a05d-f7ee-4d92-adce-1c3da751d323",
+                  "to" : "."
+               }
+            }
+         ]
+      }
+   },
+   "metrics_guid" : "51112e8f-13d4-47d4-8b39-4f4c376af570",
+   "log_source" : "CELL",
+   "start_timeout": 5,
+   "ports" : [
+      8080,
+      2222
+   ],
+   "process_guid" : "luan",
+   "rootfs" : "preloaded:cflinuxfs2",
+   "env" : [
+      {
+         "name" : "LANG",
+         "value" : "en_US.UTF-8"
+      }
+   ],
+   "memory_mb" : 256,
+   "log_guid" : "51112e8f-13d4-47d4-8b39-4f4c376af570",
+   "action" : {
+      "codependent" : {
+         "actions" : [
+            {
+               "run" : {
+                  "log_source" : "APP",
+                  "path" : "/tmp/lifecycle/launcher",
+                  "env" : [
+                     {
+                        "value" : "{\"limits\":{\"mem\":256,\"disk\":1024,\"fds\":16384},\"application_version\":\"d2d8a05d-f7ee-4d92-adce-1c3da751d323\",\"application_name\":\"luan\",\"version\":\"d2d8a05d-f7ee-4d92-adce-1c3da751d323\",\"name\":\"luan\",\"space_name\":\"test\",\"space_id\":\"5f1869c0-0510-4f07-bf80-c07d2f3c9a5e\"}",
+                        "name" : "VCAP_APPLICATION"
+                     },
+                     {
+                        "name" : "VCAP_SERVICES",
+                        "value" : "{}"
+                     },
+                     {
+                        "name" : "MEMORY_LIMIT",
+                        "value" : "256m"
+                     },
+                     {
+                        "name" : "CF_STACK",
+                        "value" : "cflinuxfs2"
+                     },
+                     {
+                        "name" : "PORT",
+                        "value" : "8080"
+                     }
+                  ],
+                  "resource_limits" : {
+                     "nofile" : 16384
+                  },
+                  "args" : [
+                     "app",
+                     "",
+                     "{\"start_command\":\"bundle exec rackup config.ru -p $PORT\"}"
+                  ]
+               }
+            }
+         ]
+      }
+   },
+   "privileged" : false,
+   "instances" : 1,
+   "disk_mb" : 1024,
+   "annotation" : "1434577055.016305",
+   "monitor" : {
+      "timeout" : {
+         "action" : {
+            "run" : {
+               "resource_limits" : {
+                  "nofile" : 1024
+               },
+               "env" : null,
+               "path" : "false",
+               "log_source" : "HEALTH"
+            }
+         },
+         "timeout" : 30000000000
+      }
+   },
+   "cpu_weight" : 1,
+   "domain" : "potato",
+   "egress_rules" : [
+      {
+         "protocol" : "tcp",
+         "destinations" : [
+            "0.0.0.0/0"
+         ],
+         "ports" : [
+            53
+         ],
+         "log" : false
+      },
+      {
+         "ports" : [
+            53
+         ],
+         "log" : false,
+         "protocol" : "udp",
+         "destinations" : [
+            "0.0.0.0/0"
+         ]
+      },
+      {
+         "log" : false,
+         "destinations" : [
+            "0.0.0.0-9.255.255.255"
+         ],
+         "protocol" : "all"
+      },
+      {
+         "protocol" : "all",
+         "destinations" : [
+            "11.0.0.0-169.253.255.255"
+         ],
+         "log" : false
+      },
+      {
+         "log" : false,
+         "destinations" : [
+            "169.255.0.0-172.15.255.255"
+         ],
+         "protocol" : "all"
+      },
+      {
+         "log" : false,
+         "protocol" : "all",
+         "destinations" : [
+            "172.32.0.0-192.167.255.255"
+         ]
+      },
+      {
+         "log" : false,
+         "protocol" : "all",
+         "destinations" : [
+            "192.169.0.0-255.255.255.255"
+         ]
+      }
+   ],
+   "modification_tag" : {
+      "epoch" : "cc223939-3062-4d3d-695f-01ef3947edc6",
+      "index" : 1
+   }
+}

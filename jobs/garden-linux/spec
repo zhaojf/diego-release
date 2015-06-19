@@ -10,6 +10,7 @@ packages:
   - garden-linux
   - rootfs_cflinuxfs2
   - shadow
+  - btrfs-progs
 
 properties:
   diego.garden-linux.kernel_network_tuning_enabled:
@@ -44,3 +45,10 @@ properties:
   diego.garden-linux.insecure_docker_registry_list:
     description: "Comma-separated list of docker registries to allow connection to even if they are not secure"
 
+  diego.garden-linux.mount_btrfs_loopback:
+    description: "If true, garden should create a btrfs-formatted loopback device for graph storage"
+    default: true
+
+  diego.garden-linux.btrfs_store_size_mb:
+    description: "Size in MB of the BTRFS backing store for graph storage"
+    default: 3000
