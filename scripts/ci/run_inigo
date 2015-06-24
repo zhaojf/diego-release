@@ -46,16 +46,16 @@ go install github.com/onsi/ginkgo/ginkgo
 
 export GARDEN_ROOTFS=/tmp/opt/inigo/rootfs
 mkdir -p $GARDEN_ROOTFS
-mount -t tmpfs tmpfs $GARDEN_ROOTFS
+# mount -t tmpfs tmpfs $GARDEN_ROOTFS
 cp -rp /opt/inigo/rootfs/* $GARDEN_ROOTFS
 
 # used for routing to apps; same logic that Garden uses.
 export EXTERNAL_ADDRESS=$(ip route get 8.8.8.8 | sed 's/.*src\s\(.*\)\s/\1/;tx;d;:x')
 
 # GARDEN_GRAPH_PATH is the root of the docker image filesystem
-export GARDEN_GRAPH_PATH=/tmp/garden-tmp
+export GARDEN_GRAPH_PATH=/tmp/btrfs/garden
 mkdir -p $GARDEN_GRAPH_PATH
-mount -t tmpfs tmpfs $GARDEN_GRAPH_PATH
+# mount -t tmpfs tmpfs $GARDEN_GRAPH_PATH
 
 color_flag=""
 if [ -n "$GO_PIPELINE_COUNTER" ]; then
